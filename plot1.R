@@ -3,9 +3,11 @@
 # Alex  M.
 # OCT-NOV 2020
 
+# Plots
 # Data Source: UCI Machine Learning Repository
-# Measruments of electric power consumption
-# URL: 
+# Individual household electric power consumption Data Set 
+# URL: https://archive.ics.uci.edu/ml/datasets/Individual+household+electric+power+consumption
+
 
 #loading libraries
 library(lubridate)
@@ -19,7 +21,7 @@ powerconsump$Time<-hms(powerconsump$Time)
 
 # Converting Char variables to numeric
 powerconsump$Global_active_power<-as.numeric(powerconsump$Global_active_power)
- 
+
 #NAs manipulating
 powerconsump$Global_active_power[is.na(powerconsump$Global_active_power)]<-0
 
@@ -32,5 +34,5 @@ hist(powerconsump_1FEB_2FEB_2007$Global_active_power,main="Global Active Power",
 axis(1, at = scale_x)     
 
 #Create the PNG file
-dev.copy(png,file="plot1.png")
+dev.copy(png,file="plot1.png",width=480,height=480)
 dev.off()

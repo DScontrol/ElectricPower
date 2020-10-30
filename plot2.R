@@ -19,7 +19,7 @@ powerconsump <- read.table("./data/household_power_consumption.txt",sep=";",head
 DataTime<-dmy_hms(paste(powerconsump$Date,powerconsump$Time))
 powerconsump<-cbind(DataTime,powerconsump)
 
-# Converting Data and Time variables format from 'char' to 'Date' and 'Time' respectively
+# Converting Data and Time variables format from 'char' to 'Date' and 'Time' respectively (for filtering)
 powerconsump$Date<-dmy(powerconsump$Date)
 powerconsump$Time<-hms(powerconsump$Time)
 
@@ -33,9 +33,11 @@ powerconsump$Global_active_power[is.na(powerconsump$Global_active_power)]<-0
 powerconsump_1FEB_2FEB_2007<-powerconsump[powerconsump$Date>="2007-02-01" & powerconsump$Date<="2007-02-02", ]
 
 #PLOT 2
-plot(powerconsump_1FEB_2FEB_2007$DataTime,powerconsump_1FEB_2FEB_2007$Global_active_power,type="l",xlab="",ylab="Global Active Power (Kilowatts)")
+scale_y<-seq(0,6,by=2)
+plot(powerconsump_1FEB_2FEB_2007$DataTime,powerconsump_1FEB_2FEB_2007$Global_active_power,type="l",xlab="",ylab="Global Active Power (Kilowatts)",yaxt="n")
+axis(2,lwd=2,at=scale_y)
 
 #Create the PNG file
-dev.copy(png,file="plot2.png")
+dev.copy(png,file="plot2.png",width=480,height=480)
 dev.off()
 
